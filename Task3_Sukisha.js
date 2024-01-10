@@ -24,50 +24,13 @@ const productArray = [
 ];
 const spareArray = [
     { spareName: "Battery", sparePrice: 500, productId: 101 },
-    // { spareName: "Temper Glass", sparePrice: 150, productId: 101 },
-    // { spareName: "Battery", sparePrice: 450, productId: 102 },
+    { spareName: "Temper Glass", sparePrice: 150, productId: 101 },
+    { spareName: "Battery", sparePrice: 450, productId: 102 },
     { spareName: "Temper Glass", sparePrice: 100, productId: 102 },
 ];
 
 function productDetails(values) {
-    if (values.productName) {
-        const result = productArray.find(product => product.productName === values.productName);
-        if (result) {
-            const brandInfo = brandArray.find(brand => brand.brandId === result.brandId);
-            if (brandInfo) {
-                return {
-                    productName: result.productName,
-                    modelNumber: result.modelNumber,
-                    brandName: brandInfo.brandName,
-                    productPrice: result.productPrice
-                };
-            }
-        } else {
-            return "Not found";
-        }
-    } else if (values.spareName) {
-        const output = spareArray.find(spare => values.spareName === spare.spareName);
-
-        if (output) {
-            const productInfo = productArray.find(product => product.productId === output.productId);
-
-            if (productInfo) {
-                const brandInfo = brandArray.find(brand => brand.brandId === productInfo.brandId);
-                if (brandInfo) {
-                    return {
-                        spareName: output.spareName,
-                        productName: productInfo.productName,
-                        modelNumber: productInfo.modelNumber,
-                        brandName: brandInfo.brandName,
-                        sparePrice: output.sparePrice
-                    };
-                }
-            } 
-        }
-        else {
-            return "Not found";
-        }
-    } else if (values.productName && values.spareName) {
+    if (values.productName && values.spareName) {
         const productInfo = productArray.find(product => product.productName === values.productName);
 
         if (productInfo) {
@@ -84,6 +47,45 @@ function productDetails(values) {
                         sparePrice: matchingSpare.sparePrice,
                     };
                 }
+            }
+        } else {
+            return "Not found";
+        }
+    } else if (values.spareName) {
+        // const output = spareArray.filter((spare) => values.spareName === spare.spareName);
+        const answer = spareArray.map((ele) => {
+            if (values.spareName === ele.spareName) {
+                const productInfo = productArray.find(product => product.productId === ele.productId);
+                if (productInfo) {
+                    const brandInfo = brandArray.find(brand => brand.brandId === productInfo.brandId);
+                    if (brandInfo) {
+                        return {
+                            spareName: ele.spareName,
+                            productName: productInfo.productName,
+                            modelNumber: productInfo.modelNumber,
+                            brandName: brandInfo.brandName,
+                            sparePrice: ele.sparePrice
+                        };
+                    }
+                } else {
+                    return "Not found";
+                }
+            }
+        });
+        const Answer = answer.filter((ele) => (ele != undefined))
+        return Answer.length > 0 ? Answer : "Not found";
+    }
+    else if (values.productName) {
+        const result = productArray.find(product => product.productName === values.productName);
+        if (result) {
+            const brandInfo = brandArray.find(brand => brand.brandId === result.brandId);
+            if (brandInfo) {
+                return {
+                    productName: result.productName,
+                    modelNumber: result.modelNumber,
+                    brandName: brandInfo.brandName,
+                    productPrice: result.productPrice
+                };
             }
         }
         else {
@@ -103,5 +105,5 @@ const result4 = productDetails({ spareName: "Camera" });
 console.log(result4);
 const result5 = productDetails({ productName: "IphoneY12", spareName: "Temper Glass" });
 console.log(result5);
-const result6 = productDetails({ productName: "OppoA23"});
+const result6 = productDetails({ productName: "OppoA23" });
 console.log(result6);
