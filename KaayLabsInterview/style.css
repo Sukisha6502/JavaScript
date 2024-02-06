@@ -1,0 +1,75 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+nav {
+    background-color:black;
+    color: white;
+    padding: 25px;
+}
+.home{
+    background-size: cover;
+    font-style: normal;
+    font-size: 20px;
+    text-align:center;
+    padding:10px;
+    margin:10px;
+}
+li,h1 ul {
+    display: inline;
+    padding: 5px;
+}
+h2{
+    display: block;
+}
+ul{
+    margin-left: 70%;
+}
+li{
+    color: gray;
+    cursor: pointer;
+}
+li:hover{
+    color: white;
+}
+
+.box1{
+border-color: black;
+border-width: 2px;
+border-style: solid;
+display: inline-block;
+width: 220px;
+height: 332px;
+
+}
+.box2{
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    display: inline-block;
+    width: 220px;
+    height: 332px;
+    
+    }
+.collection1{
+    text-align: center;
+    margin: 20px;
+    padding: 25px;
+}
+.collection2{
+    text-align: center;
+    margin: 20px;
+    padding: 25px;
+}
+.about{
+    text-align: center;
+    margin:20px;
+    padding:20px;
+
+}
+.contact {
+    background-color:black;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
